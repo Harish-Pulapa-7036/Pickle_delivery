@@ -1,0 +1,2 @@
+node_modules
+.env  # optional - to ignore environment files
