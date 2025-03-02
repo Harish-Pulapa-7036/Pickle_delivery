@@ -13,7 +13,9 @@ import PickleList from "./pages/PickleList";
 function App() {
     return (
         <Router>
-            <div className="app-container">
+            <div className="app-container" style={{
+                backgroundImage: "url('/images/background_pickle.jpg')"
+            }}>
                 <Header />
                 <main className="main-content">
                     <Routes>

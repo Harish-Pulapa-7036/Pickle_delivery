@@ -22,11 +22,10 @@ const Login = () => {
         navigate('/signup');  // Navigate to login page
     };
     return (
-        <Container component="main" maxWidth="xs">
+        <Container component="main" maxWidth="xs" style={{maxHeight:"70vh"}} className="invisibleScroller">
             <Paper
                 elevation={6}
                 sx={{
-                    mt: 8,
                     p: 4,
                     display: 'flex',
                     flexDirection: 'column',

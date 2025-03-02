@@ -43,12 +43,12 @@ const Signup = () => {
     };
 
     return (
-        <Container component="main" maxWidth="xs">
+        <Container component="main" maxWidth="xs" style={{maxHeight:"70vh"}} className="invisibleScroller">
             <Paper 
                 elevation={6} 
                 sx={{ 
                     p: 4, 
-                    mt: 8, 
+                    m: 0, 
                     display: 'flex', 
                     flexDirection: 'column', 
                     alignItems: 'center', 
