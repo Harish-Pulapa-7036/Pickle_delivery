@@ -60,7 +60,7 @@ const PickleList = () => {
     const pickles = tabIndex === 0 ? vegPickles : nonVegPickles;
 
     return (
-        <Box className="pickle-tabs-container invisibleScroller" sx={{ width: "100%" ,maxHeight:"70vh"}} >
+        <Box className="pickle-tabs-container " sx={{ width: "100%" ,}} >
             <Tabs value={tabIndex} onChange={handleTabChange} centered sx={{
                 '& .MuiTab-root': {
                     color: 'white',              // Inactive Tab color
@@ -77,7 +77,7 @@ const PickleList = () => {
                 <Tab label="Veg Pickles" />
                 <Tab label="Non-Veg Pickles" />
             </Tabs>
-            <div className="pickle-list-container">
+            <div className="pickle-list-container invisibleScroller" style={{maxHeight:"70vh"}}>
                 {pickles.map((pickle, index) => (
                     <PickleCard
                         key={index}
