@@ -34,7 +34,7 @@ const vegPickles = [
     { image: '/images/mango-pickle.jpg', name: 'Garlic Pickle', price: 180 },
     { image: '/images/mango-pickle.jpg', name: 'Mango Pickle', price: 150 },
     { image: '/images/mango-pickle.jpg', name: 'Lemon Pickle', price: 120 },
-    { image: '/images/mango-pickle.jpg', name: 'Garlic Pickle', price: 180 },   { image: '/images/mango-pickle.jpg', name: 'Mango Pickle', price: 150 },
+    { image: '/images/mango-pickle.jpg', name: 'Garlic Pickle', price: 180 }, { image: '/images/mango-pickle.jpg', name: 'Mango Pickle', price: 150 },
     { image: '/images/mango-pickle.jpg', name: 'Lemon Pickle', price: 120 },
     { image: '/images/mango-pickle.jpg', name: 'Garlic Pickle', price: 180 },
 ];
@@ -45,7 +45,7 @@ const nonVegPickles = [
     { image: '/images/fish-pickle.jpg', name: 'Fish Pickle', price: 280 },
     { image: '/images/mango-pickle.jpg', name: 'Mango Pickle', price: 150 },
     { image: '/images/mango-pickle.jpg', name: 'Lemon Pickle', price: 120 },
-    { image: '/images/mango-pickle.jpg', name: 'Garlic Pickle', price: 180 },   { image: '/images/mango-pickle.jpg', name: 'Mango Pickle', price: 150 },
+    { image: '/images/mango-pickle.jpg', name: 'Garlic Pickle', price: 180 }, { image: '/images/mango-pickle.jpg', name: 'Mango Pickle', price: 150 },
     { image: '/images/mango-pickle.jpg', name: 'Lemon Pickle', price: 120 },
     { image: '/images/mango-pickle.jpg', name: 'Garlic Pickle', price: 180 },
 ];
@@ -60,34 +60,34 @@ const PickleList = () => {
     const pickles = tabIndex === 0 ? vegPickles : nonVegPickles;
 
     return (
-        <Box className="pickle-tabs-container" sx={{width:"100%"}}> 
-            <Tabs value={tabIndex} onChange={handleTabChange} centered     sx={{
-        '& .MuiTab-root': {
-            color: 'white',              // Inactive Tab color
-            textTransform: 'none',       // Optional: to prevent uppercase
-        },
-        '& .Mui-selected': {
-            color: 'white',              // Active Tab color
-            fontWeight: 'bold',          // Optional: make selected bold
-        },
-        margin:"20px"
-        // backgroundColor: '#28a745',      // Background color for the tab bar
-    }}
->
+        <Box className="pickle-tabs-container invisibleScroller" sx={{ width: "100%" ,maxHeight:"70vh"}} >
+            <Tabs value={tabIndex} onChange={handleTabChange} centered sx={{
+                '& .MuiTab-root': {
+                    color: 'white',              // Inactive Tab color
+                    textTransform: 'none',       // Optional: to prevent uppercase
+                },
+                '& .Mui-selected': {
+                    color: 'white',              // Active Tab color
+                    fontWeight: 'bold',          // Optional: make selected bold
+                },
+                margin: "20px"
+                // backgroundColor: '#28a745',      // Background color for the tab bar
+            }}
+            >
                 <Tab label="Veg Pickles" />
                 <Tab label="Non-Veg Pickles" />
-            </Tabs> 
-        <div className="pickle-list-container">
-            {pickles.map((pickle, index) => (
-                <PickleCard
-                    key={index}
-                    image={pickle.image}
-                    name={pickle.name}
-                    price={pickle.price}
-                    onAddToCart={() => console.log(`${pickle.name} added to cart`)}
-                />
-            ))}
-        </div>
+            </Tabs>
+            <div className="pickle-list-container">
+                {pickles.map((pickle, index) => (
+                    <PickleCard
+                        key={index}
+                        image={pickle.image}
+                        name={pickle.name}
+                        price={pickle.price}
+                        onAddToCart={() => console.log(`${pickle.name} added to cart`)}
+                    />
+                ))}
+            </div>
         </Box>
     );
 };
