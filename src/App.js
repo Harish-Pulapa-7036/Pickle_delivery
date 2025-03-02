@@ -8,6 +8,7 @@ import Contact from "./pages/Contact";
 import Signup from "./pages/Signup";
 import './App.css';
 import Login from "./pages/Login";
+import PickleList from "./pages/PickleList";
 
 function App() {
     return (
@@ -21,6 +22,8 @@ function App() {
                         <Route path="/contact" element={<Contact />} />
                         <Route path="/signup" element={<Signup />} />
                         <Route path="/login" element={<Login />} />
+                        <Route path="/picklelist" element={<PickleList />} />
+
 
                     </Routes>
                 </main>
