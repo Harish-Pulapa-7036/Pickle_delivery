@@ -12,12 +12,12 @@ code {
     monospace;
 }
 .invisibleScroller {
-  overflow: hidden;
-}
-
-.invisibleScroller:hover {
   overflow-y: auto;
 }
+
+/* .invisibleScroller:hover {
+  overflow-y: auto;
+} */
 
 .invisibleScroller::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
