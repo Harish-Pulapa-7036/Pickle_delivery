@@ -13,6 +13,8 @@ const Login = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        navigate('/picklelist');  // Navigate to login page
+
         console.log('Form Data:', formData);
         // Add your form submission logic here
     };
