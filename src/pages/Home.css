@@ -1,0 +1,22 @@
+.home-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 20px;
+}
+
+.home-container h1 {
+    font-size: 3rem;
+    margin: 0;
+}
+
+.home-container p {
+    font-size: 1.5rem;
+    margin: 10px 0 0;
+}
