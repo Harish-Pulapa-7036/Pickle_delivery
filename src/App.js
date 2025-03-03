@@ -9,6 +9,7 @@ import Signup from "./pages/Signup";
 import './App.css';
 import Login from "./pages/Login";
 import PickleList from "./pages/PickleList";
+import CartList from "./pages/CartList";
 
 function App() {
     return (
@@ -25,6 +26,7 @@ function App() {
                         <Route path="/signup" element={<Signup />} />
                         <Route path="/login" element={<Login />} />
                         <Route path="/picklelist" element={<PickleList />} />
+                        <Route path="/cart" element={<CartList />} />
 
 
                     </Routes>
