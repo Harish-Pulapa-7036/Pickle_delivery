@@ -46,6 +46,7 @@
     font-size: 14px;
 }
 
+
 /* Mobile - 2 cards per row */
 @media (max-width: 600px) {
     .pickle-list-container {
