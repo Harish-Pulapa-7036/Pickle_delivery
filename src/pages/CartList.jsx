@@ -2,6 +2,7 @@ import { Button, Card, CardActions, CardContent, CardMedia, IconButton, ToggleBu
 import "./CartList.css"
 import { useState } from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
+import OrderPopup from "../components/OrderPopup";
 const CartItem = () => {
     const [selectedWeight, setSelectedWeight] = useState('250gms');
     const [quantity, setQuantity] = useState(1);
@@ -69,6 +70,18 @@ const CartItem = () => {
     </>
 }
 const CartList = () => {
+     // Function to handle order placement
+     const [orderPlaced, setOrderPlaced] = useState(false);
+     const placeOrder = () => {
+        setOrderPlaced(true);
+
+        // // Play order placed sound
+        const audio = new Audio('/sounds/order-sound.wav'); // Place file in public/sounds folder
+        audio.play();
+
+        // Automatically close popup after 3 seconds
+        setTimeout(() => setOrderPlaced(false), 3000);
+    };
     return (
         <>
         <div style={{ maxHeight: "70vh",paddingBottom:"20px" }} className="cartList-container invisibleScroller">
@@ -89,12 +102,18 @@ const CartList = () => {
                 </Typography>
             </div>
 
-            <Button size="large"  sx={{background:'green',color:"white", '&:hover': {
+            <Button size="large" 
+             sx={{background:'green',color:"white", '&:hover': {
                         backgroundColor: "#0056b3",  // Keep white on hover
                         color: "white"             // Optional - keep text color
-                    }}}>place order</Button>
+                    }}}
+                    onClick={placeOrder}
+                    >
+                        place order
+                        </Button>
 
             </div>
+            <OrderPopup setOrderPlaced={setOrderPlaced} orderPlaced={orderPlaced}/>
         </>
     )
 }
