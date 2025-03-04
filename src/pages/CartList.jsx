@@ -22,7 +22,7 @@ const CartItem = () => {
                 title="green iguana"
             />
             <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
+                <Typography gutterBottom variant="h7" component="div">
                     mango pickle
                 </Typography>
                 <Typography variant="body2" sx={{ color: 'text.secondary' }}>
@@ -30,7 +30,7 @@ const CartItem = () => {
                 </Typography>
 
             </CardContent>
-            <Typography style={{ display: "inline-flex", margin: "16px", alignItems: 'center', backgroundColor: "#e9e3e3", alignSelf: "flex-start" }}>
+            <Typography style={{ display: "inline-flex", marginLeft: "8px", alignItems: 'center', backgroundColor: "#e9e3e3", alignSelf: "flex-start" }}>
                 <Button size="small" onClick={decrementQuantity}>-</Button>
                 <Typography>{quantity}</Typography>
                 <Button size="small" onClick={incrementQuantity}>+</Button>
