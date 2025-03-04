@@ -51,6 +51,7 @@ const nonVegPickles = [
     { image: '/images/mango-pickle.jpg', name: 'Garlic Pickle', price: 180 },
 ];
 
+
 const PickleList = () => {
     const [tabIndex, setTabIndex] = useState(0);
     const navigate = useNavigate()
@@ -120,29 +121,6 @@ const PickleList = () => {
                 ))}
 
             </div>
-            <Button
-                // color="primary" 
-                onClick={handleCheckOutClick} 
-                className='checkout-btn'
-                sx={{
-                    textTransform: 'none',
-                    position: "absolute",
-                    fontWeight: 'bold',
-                    width: "60%",
-                    backgroundColor: "#0056b3",
-                    color: "white",
-                    left: "50%",
-                    top: "-1%",
-                    transform: "translateX(-50%)",  // Center the button horizontally
-                    '&:hover': {
-                        backgroundColor: "#0056b3",  // Keep white on hover
-                        color: "white"             // Optional - keep text color
-                    }
-                }}
-
-            >
-                Checkout
-            </Button>
         </Box>
     );
 };

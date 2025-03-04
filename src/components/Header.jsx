@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './Header.css';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
 const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -35,8 +36,13 @@ const Header = () => {
                     <li><Link to="/about" onClick={() => setMenuOpen(false)}>About</Link></li>
                     <li><Link to="/contact" onClick={() => setMenuOpen(false)}>Contact</Link></li>
                     <li><Link to="/signup" onClick={() => setMenuOpen(false)}>Signup</Link></li>
+                    <li>  <Link to="/cart" className="cart-icon" onClick={() => setMenuOpen(false)}>
+                    <ShoppingCartIcon />
+                    {4 > 0 && <span className="cart-count">{4}</span>}
+                </Link></li>
                 </ul>
             </nav>
+          
         </header>
     );
 };
