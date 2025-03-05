@@ -7,10 +7,15 @@ import {
     Paper, 
     Typography, 
     Box, 
-    Avatar 
+    Avatar, 
+    InputAdornment,
+    IconButton
 } from "@mui/material";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import axios from 'axios';
 
+// https://pickle-backend-2xil.onrender.com
 const Signup = () => {
     const [formData, setFormData] = useState({
         name: '',
@@ -19,23 +24,78 @@ const Signup = () => {
         password: '',
         confirmPassword: ''
     });
+    const [phoneError,setPhoneError]=useState('');
     const [error, setError] = useState('');
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
 
+    const togglePasswordVisibility = () => {
+        setShowPassword((prev) => !prev);
+    };
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
+    
+        if (name === "phoneNumber") {
+            // Allow only digits
+            const numericValue = value.replace(/[^0-9]/g, "");  // Remove anything that's not a digit
+    
+            setFormData({ ...formData, [name]: numericValue });
+    
+            // Validation for 10 digits
+            if (numericValue.length === 10) {
+                setPhoneError(""); // No error if exactly 10 digits
+            } else {
+                setPhoneError("Phone number should be 10 digits");
+            }
+        } else if (name === "confirmPassword") {
+    
+            setFormData({ ...formData, [name]: value });
+    
+            if (formData.password === value) {
+                setError('');
+            } else {
+                setError("Passwords do not match");
+            }
+        } 
+        else {
+            setFormData({ ...formData, [name]: value });
+        }
     };
+
+const handleSignup = async () => {
+    try {
+        const response = await axios.post('https://pickle-backend-2xil.onrender.com/api/v1/signup', {
+            name: formData.name,
+            address: formData.address,
+            phoneNumber: formData.phoneNumber,
+            password: formData.password,
+            confirmPassword:formData.confirmPassword
+        });
+
+        // Handle success (e.g., show a message, redirect, etc.)
+        alert('Signup successful!');
+        navigate('/login');  // Navigate to login page
+    } catch (error) {
+        console.error('Signup failed', error.response?.data || error.message);
+
+        // Handle error (e.g., show error message to user)
+        alert(error.response?.data?.message || 'Signup failed, please try again.');
+    }
+};
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (formData.password !== formData.confirmPassword) {
-            setError("Passwords do not match");
-            return;
+        
+        if(error || phoneError || 
+            formData.address.length === 0 || 
+            formData.name.length === 0 || 
+            formData.password.length === 0 || 
+            formData.confirmPassword.length === 0 ||
+            formData.phoneNumber.length === 0
+        ) return
+        else {
+            handleSignup()
         }
-        setError('');
-        console.log("Signup Data:", formData);
-        // API call logic can go here
     };
 
     const handleLoginClick = () => {
@@ -74,17 +134,28 @@ const Signup = () => {
                         margin="normal"
                         InputProps={{ sx: { borderRadius: '12px' } }}
                     />
-                    <TextField
-                        fullWidth
-                        label="Phone Number"
-                        name="phoneNumber"
-                        type="number"
-                        value={formData.phoneNumber}
-                        onChange={handleChange}
-                        required
-                        margin="normal"
-                        InputProps={{ sx: { borderRadius: '12px' } }}
-                    />
+                  <TextField
+    fullWidth
+    label="Phone Number"
+    name="phoneNumber"
+    type="text"  // Change to text
+    value={formData.phoneNumber}
+    onChange={handleChange}
+    required
+    margin="normal"
+    inputProps={{
+        maxLength: 10,  // Optional, to limit to 10 digits
+        inputMode: "numeric",  // Show numeric keyboard on mobile
+        pattern: "[0-9]*"  // Helps some browsers restrict input
+    }}
+    InputProps={{ sx: { borderRadius: '12px' } }}
+/>
+
+                    {phoneError && (
+                        <Typography color="error" sx={{ mt: 1 }}>
+                            {phoneError}
+                        </Typography>
+                    )}
                     <TextField
                         fullWidth
                         label="Address"
@@ -97,17 +168,26 @@ const Signup = () => {
                         margin="normal"
                         InputProps={{ sx: { borderRadius: '12px' } }}
                     />
-                    <TextField
-                        fullWidth
-                        label="Password"
-                        name="password"
-                        type="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        required
-                        margin="normal"
-                        InputProps={{ sx: { borderRadius: '12px' } }}
-                    />
+                   <TextField
+            fullWidth
+            label="Password"
+            name="password"
+            type={showPassword ? "text" : "password"} // This controls the visibility
+            value={formData.password}
+            onChange={handleChange}
+            required
+            margin="normal"
+            InputProps={{
+                endAdornment: (
+                    <InputAdornment position="end">
+                        <IconButton onClick={togglePasswordVisibility} edge="end">
+                            {showPassword ? <VisibilityOff /> : <Visibility />}
+                        </IconButton>
+                    </InputAdornment>
+                ),
+                sx: { borderRadius: '12px' }
+            }}
+        />
                     <TextField
                         fullWidth
                         label="Confirm Password"
