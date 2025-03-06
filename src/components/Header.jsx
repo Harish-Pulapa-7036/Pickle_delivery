@@ -6,7 +6,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 const Header = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef();
-
+    const token =sessionStorage.getItem("token")
     // Close menu if user clicks outside of the menu
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -35,7 +35,10 @@ const Header = () => {
                     <li><Link to="/" onClick={() => setMenuOpen(false)}>Home</Link></li>
                     <li><Link to="/about" onClick={() => setMenuOpen(false)}>About</Link></li>
                     <li><Link to="/contact" onClick={() => setMenuOpen(false)}>Contact</Link></li>
-                    <li><Link to="/signup" onClick={() => setMenuOpen(false)}>Signup</Link></li>
+                 {   token ? 
+                 <li><Link to="/login" onClick={() => {setMenuOpen(false);sessionStorage.removeItem('token')}}>LogOut</Link></li>
+                  : 
+                  <li><Link to="/signup" onClick={() => setMenuOpen(false)}>Signup</Link></li>}
                 
                     <li>  <Link to="/cart" className="cart-icon" onClick={() => setMenuOpen(false)}>
                     <ShoppingCartIcon />
