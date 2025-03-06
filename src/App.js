@@ -22,7 +22,7 @@ function App() {
 
     return (
         <div className="app-container" style={{
-            backgroundImage: "url('/images/background_pickle.jpg')"
+            // backgroundImage: "url('/images/background_pickle.jpg')"
         }}>
             <Header />
             <main className="main-content">

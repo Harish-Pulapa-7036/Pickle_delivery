@@ -25,5 +25,11 @@
     border-top: 1px solid rgba(0, 0, 0, 0.15);
     font-weight: 500;
 }
-
-
+@media (max-width: 600px) {
+.css-46bh2p-MuiCardContent-root:last-child {
+    padding-bottom: 0px !important;
+}
+.css-46bh2p-MuiCardContent-root {
+    padding: 0px !important
+}
+}

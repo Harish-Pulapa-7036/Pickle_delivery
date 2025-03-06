@@ -16,58 +16,67 @@ const CartItem = () => {
     const incrementQuantity = () => setQuantity(prev => prev + 1);
     const decrementQuantity = () => setQuantity(prev => Math.max(1, prev - 1));
     return <>
-        <Card sx={{ border: "3px solid white" }}>
+    <Card sx={{ border: "3px solid white", fontFamily: 'Poppins, sans-serif',borderRadius:"20px" }}>
+        <CardContent style={{ display: "flex",
+                    marginLeft:"8px"
+
+         }}>
             <CardMedia
-                sx={{ height: "100px" }}
+                sx={{ width: "100px", height: "80px" }}
                 image="/images/mango-pickle.jpg"
-                title="green iguana"
+                title="Mango Pickle"
             />
-            <CardContent>
-                <Typography gutterBottom variant="h7" component="div">
-                    mango pickle
+            <CardContent sx={{ fontFamily: 'Poppins, sans-serif' }}>
+                <Typography gutterBottom variant="h7" component="div" sx={{ fontWeight: 600, fontSize: '1rem' }}>
+                    Mango Pickle
                 </Typography>
-                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                <Typography variant="body2" sx={{ color: 'text.secondary', fontSize: '0.875rem' }}>
                     120 Rs/kg
                 </Typography>
-
             </CardContent>
-            <Typography style={{ display: "inline-flex", marginLeft: "8px", alignItems: 'center', backgroundColor: "#e9e3e3", alignSelf: "flex-start" }}>
+        </CardContent>
+        <CardContent>
+            <Typography
+                style={{
+                    display: "inline-flex",
+                    alignItems: 'center',
+                    backgroundColor: "#e9e3e3",
+                    alignSelf: "flex-start",
+                    fontFamily: 'Poppins, sans-serif',
+                    marginLeft:"8px"
+                }}
+            >
                 <Button size="small" onClick={decrementQuantity}>-</Button>
-                <Typography>{quantity}</Typography>
+                <Typography sx={{ fontWeight: 500 }}>{quantity}</Typography>
                 <Button size="small" onClick={incrementQuantity}>+</Button>
             </Typography>
-            <CardActions >
+            <CardActions>
                 {/* Weight Options */}
-                <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-
                     <ToggleButtonGroup
                         value={selectedWeight}
                         exclusive
                         onChange={handleWeightChange}
                         aria-label="weight selection"
                         size="small"
+                        sx={{ fontFamily: 'Poppins, sans-serif',paddingLeft:"0px" }}
                     >
                         <ToggleButton value="250gms">250gms</ToggleButton>
                         <ToggleButton value="500gms">500gms</ToggleButton>
                         <ToggleButton value="750gms">750gms</ToggleButton>
                         <ToggleButton value="1kg">1kg</ToggleButton>
                     </ToggleButtonGroup>
-                </div>
-
 
                 {/* Delete Button */}
                 <div>
-
                     <IconButton size="small" color="error">
                         <DeleteIcon />
                     </IconButton>
                 </div>
-                {/* Quantity Controls */}
-
             </CardActions>
+        </CardContent>
+    </Card>
+</>
 
-        </Card>
-    </>
 }
 const CartList = () => {
      // Function to handle order placement

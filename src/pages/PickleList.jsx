@@ -2,13 +2,22 @@ import React, { useEffect, useState } from 'react';
 import './PickleList.css';  // Importing the external CSS
 import { Box, Button, Tab, Tabs } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+
 
 const PickleCard = ({ image, name, price, onAddToCart }) => (
     <div className="pickle-card">
         <img src={image} alt={name} className="pickle-image" />
         <h3 className="pickle-name">{name}</h3>
         <p className="pickle-price">₹{price}</p>
-        <button className="add-to-cart-btn" onClick={onAddToCart}>Add to Cart</button>
+        <button className="add-to-cart-btn" onClick={onAddToCart}>
+        <div style={{ width: '12px', height: '12px' }}>
+    <ShoppingCartIcon style={{ width: '100%', height: '100%' }} />
+</div>
+
+            Add to Cart
+            
+            </button>
     </div>
 );
 // const pickles = [
