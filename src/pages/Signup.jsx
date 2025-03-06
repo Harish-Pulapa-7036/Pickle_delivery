@@ -14,6 +14,7 @@ import {
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import axios from 'axios';
+import Loader from "../components/Loader";
 
 // https://pickle-backend-2xil.onrender.com
 const Signup = () => {
@@ -28,6 +29,7 @@ const Signup = () => {
     const [error, setError] = useState('');
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
+    const [showLoader,setShowLoader]=useState(false)
 
     const togglePasswordVisibility = () => {
         setShowPassword((prev) => !prev);
@@ -63,6 +65,7 @@ const Signup = () => {
     };
 
 const handleSignup = async () => {
+    setShowLoader(true)
     try {
         const response = await axios.post('https://pickle-backend-2xil.onrender.com/api/v1/signup', {
             name: formData.name,
@@ -71,12 +74,14 @@ const handleSignup = async () => {
             password: formData.password,
             confirmPassword:formData.confirmPassword
         });
+        setShowLoader(false)
 
         // Handle success (e.g., show a message, redirect, etc.)
         alert('Signup successful!');
         navigate('/login');  // Navigate to login page
     } catch (error) {
         console.error('Signup failed', error.response?.data || error.message);
+        setShowLoader(false)
 
         // Handle error (e.g., show error message to user)
         alert(error.response?.data?.message || 'Signup failed, please try again.');
@@ -103,6 +108,7 @@ const handleSignup = async () => {
     };
 
     return (
+        <>
         <Container component="main" maxWidth="xs" style={{maxHeight:"70vh"}} className="invisibleScroller">
             <Paper 
                 elevation={6} 
@@ -234,6 +240,9 @@ const handleSignup = async () => {
                 </Box>
             </Paper>
         </Container>
+        <Loader showLoader={showLoader}/>
+        </>
+
     );
 };
 

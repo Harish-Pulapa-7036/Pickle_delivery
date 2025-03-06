@@ -3,11 +3,13 @@ import { Container, TextField, Button, Typography, Box, Paper, Avatar } from '@m
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Loader from '../components/Loader';
 
 const Login = () => {
     const [formData, setFormData] = useState({ phoneNumber: '', password: '' });
     const navigate = useNavigate();
     const [phoneError, setPhoneError] = useState('');
+    const [showLoader,setShowLoader]=useState(false)
     useEffect(() => {
         const token = sessionStorage.getItem('token');
         if (token) {
@@ -34,6 +36,7 @@ const Login = () => {
         }
     };
     const handleSignin = async () => {
+        setShowLoader(true)
         try {
             const response = await axios.post('https://pickle-backend-2xil.onrender.com/api/v1/signin', {
                 phoneNumber: formData.phoneNumber,
@@ -41,7 +44,7 @@ const Login = () => {
                
             });
             const token = response.data.token;
-
+            setShowLoader(false)
             // ✅ Store token in sessionStorage
             sessionStorage.setItem('token', token);
             // Handle success (e.g., show a message, redirect, etc.)
@@ -49,7 +52,7 @@ const Login = () => {
             navigate('/picklelist');  
         } catch (error) {
             console.error('Signup failed', error.response?.data || error.message);
-    
+            setShowLoader(false)
             // Handle error (e.g., show error message to user)
             alert(error.response?.data?.message || 'Signup failed, please try again.');
         }
@@ -70,6 +73,7 @@ const Login = () => {
         navigate('/signup');  // Navigate to login page
     };
     return (
+        <>
         <Container component="main" maxWidth="xs" style={{ maxHeight: "70vh" }} className="invisibleScroller">
             <Paper
                 elevation={6}
@@ -153,6 +157,8 @@ const Login = () => {
                 </Typography>
             </Paper>
         </Container>
+        <Loader showLoader={showLoader}/>
+        </>
     );
 };
 
