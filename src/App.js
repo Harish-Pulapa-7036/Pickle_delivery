@@ -11,6 +11,7 @@ import Login from "./pages/Login";
 import PickleList from "./pages/PickleList";
 import CartList from "./pages/CartList";
 import PrivateRoute from "./PrivateRoute";
+import OrdersList from "./pages/OrderList";
 
 function App() {
     const navigate=useNavigate()
@@ -34,6 +35,8 @@ function App() {
                     <Route path="/login" element={<Login />} />
                     <Route path="/picklelist" element={<PrivateRoute><PickleList /></PrivateRoute>} />
                     <Route path="/cart" element={<PrivateRoute><CartList /></PrivateRoute>} />
+                    <Route path="/orders" element={<PrivateRoute><OrdersList /></PrivateRoute>} />
+
                 </Routes>
             </main>
             <Footer />

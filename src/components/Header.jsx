@@ -39,6 +39,7 @@ const Header = () => {
                  <li><Link to="/login" onClick={() => {setMenuOpen(false);sessionStorage.removeItem('token')}}>LogOut</Link></li>
                   : 
                   <li><Link to="/signup" onClick={() => setMenuOpen(false)}>Signup</Link></li>}
+                    <li><Link to="/orders" onClick={() => setMenuOpen(false)}>Your Orders</Link></li>
                 
                     <li>  <Link to="/cart" className="cart-icon" onClick={() => setMenuOpen(false)}>
                     <ShoppingCartIcon />
