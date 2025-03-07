@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './Header.css';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
-const Header = () => {
+const Header = ({getCartItems,cartCount}) => {
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef();
     const token =sessionStorage.getItem("token")
@@ -41,9 +41,9 @@ const Header = () => {
                   <li><Link to="/signup" onClick={() => setMenuOpen(false)}>Signup</Link></li>}
                     <li><Link to="/orders" onClick={() => setMenuOpen(false)}>Your Orders</Link></li>
                 
-                    <li>  <Link to="/cart" className="cart-icon" onClick={() => setMenuOpen(false)}>
+                    <li>  <Link to="/cart" className="cart-icon" onClick={() => {setMenuOpen(false);getCartItems()}}>
                     <ShoppingCartIcon />
-                    {4 > 0 && <span className="cart-count">{4}</span>}
+                    {cartCount.length > 0 && <span className="cart-count">{cartCount}</span>}
                 </Link></li>
                 </ul>
             </nav>
