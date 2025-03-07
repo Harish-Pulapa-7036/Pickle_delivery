@@ -57,7 +57,7 @@ const CartItem = ({item}) => {
             <CardActions>
                 {/* Weight Options */}
                     <ToggleButtonGroup
-                        value={item.quantity}
+                        value={item.weight}
                         exclusive
                         onChange={handleWeightChange}
                         aria-label="weight selection"

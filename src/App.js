@@ -22,9 +22,11 @@ function App() {
 
     useEffect(() => {
         if (sessionStorage.getItem("token")) {
+            getCartItems()
             navigate('/')
         } else navigate('/login')
     }, [])
+ 
     const getCartItems = async () => {
         setShowLoader(true);
 
@@ -73,7 +75,7 @@ function App() {
         <div className="app-container" style={{
             // backgroundImage: "url('/images/background_pickle.jpg')"
         }}>
-            <Header getCartItems={getCartItems} cartCount={cartItems}/>
+            <Header  cartCount={cartItems.length}/>
             <main className="main-content">
                 <Routes>
                     <Route path="/" element={<PrivateRoute><PickleList onAddToCart={onAddToCart} /></PrivateRoute>} />
