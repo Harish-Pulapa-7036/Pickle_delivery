@@ -13,7 +13,7 @@ const Login = () => {
     useEffect(() => {
         const token = sessionStorage.getItem('token');
         if (token) {
-            navigate('/picklelist');
+            navigate('/');
         }
     }, [navigate]);
     const handleChange = (e) => {
@@ -49,7 +49,7 @@ const Login = () => {
             sessionStorage.setItem('token', token);
             // Handle success (e.g., show a message, redirect, etc.)
             alert('Signin successful!');
-            navigate('/picklelist');  
+            navigate('/');  
         } catch (error) {
             console.error('Signup failed', error.response?.data || error.message);
             setShowLoader(false)

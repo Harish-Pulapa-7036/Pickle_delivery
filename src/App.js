@@ -22,10 +22,10 @@ function App() {
 
     useEffect(() => {
         if (sessionStorage.getItem("token")) {
-            getCartItems()
-            navigate('/')
+            // navigate('/')
+            getCartItems();
         } else navigate('/login')
-    }, [])
+    }, [navigate])
  
     const getCartItems = async () => {
         setShowLoader(true);
@@ -64,7 +64,74 @@ function App() {
             console.log(response);
             setCartItems(response.data.cart.products)
             setShowLoader(false)
+        } catch (error) {
+            setShowLoader(false)
+            alert(error.response?.data?.message || 'failed to add to cart, please try again.');
 
+        }
+    }
+
+    const handleQuantityOrWeight=async(e,product,type,newWeight)=>{
+        console.log(e.target.value,product);
+        
+        setShowLoader(true)
+        let body;
+        if(type === "weight"){
+            body = {
+            
+                productId: product._id,
+                weight: e.target.value,
+                quantity: product.quantity
+            }
+        }else if(type === "increment") {
+            body = {
+            
+                productId: product._id,
+                weight:product.weight,
+                quantity: product.quantity >=1 && product.quantity+1 
+            }
+        }
+        else if(type === "decrement") {
+            if (product.quantity <= 1) {
+                setShowLoader(false)
+                return;  // Exit the function if quantity is already 1
+
+            }
+            body = {
+                productId: product._id,
+                weight: product.weight,
+                quantity: product.quantity - 1
+            };
+        }else return
+     
+        let url = 'http://localhost:8000/api/v1/pickle/update-product'
+        try {
+            let response = await axios.put(url, body, {
+                headers: {
+                    token: sessionStorage.getItem('token')   // <- Add the token in headers
+                }
+            })
+            console.log(response);
+            setCartItems(response.data.cart.products)
+            setShowLoader(false)
+        } catch (error) {
+            setShowLoader(false)
+            alert(error.response?.data?.message || 'failed to add to cart, please try again.');
+
+        }
+    }
+    const handleDeleteCartItem=async(productId)=>{
+        
+       let url = `http://localhost:8000/api/v1/pickle/deleteCart-product?productId=${productId}`
+        try {
+            let response = await axios.delete(url, {
+                headers: {
+                    token: sessionStorage.getItem('token')   // <- Add the token in headers
+                }
+            })
+            console.log(response);
+            setCartItems(response.data.cart.products)
+            setShowLoader(false)
         } catch (error) {
             setShowLoader(false)
             alert(error.response?.data?.message || 'failed to add to cart, please try again.');
@@ -83,8 +150,8 @@ function App() {
                     <Route path="/contact" element={<Contact />} />
                     <Route path="/signup" element={<Signup />} />
                     <Route path="/login" element={<Login />} />
-                    <Route path="/picklelist" element={<PrivateRoute><PickleList onAddToCart={onAddToCart} /></PrivateRoute>} />
-                    <Route path="/cart" element={<PrivateRoute><CartList cartItems={cartItems} /></PrivateRoute>} />
+                    {/* <Route path="/picklelist" element={<PrivateRoute><PickleList onAddToCart={onAddToCart} /></PrivateRoute>} /> */}
+                    <Route path="/cart" element={<PrivateRoute><CartList handleQuantityOrWeight={handleQuantityOrWeight} handleDeleteCartItem={handleDeleteCartItem} cartItems={cartItems} /></PrivateRoute>} />
                     <Route path="/orders" element={<PrivateRoute><OrdersList /></PrivateRoute>} />
 
                 </Routes>

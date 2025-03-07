@@ -3,15 +3,15 @@ import "./CartList.css"
 import { useState } from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
 import OrderPopup from "../components/OrderPopup";
-const CartItem = ({item}) => {
+const CartItem = ({item,handleQuantityOrWeight,handleDeleteCartItem}) => {
     const [selectedWeight, setSelectedWeight] = useState('250gms');
     const [quantity, setQuantity] = useState(1);
 
-    const handleWeightChange = (event, newWeight) => {
-        if (newWeight !== null) {
-            setSelectedWeight(newWeight);
-        }
-    };
+    // const handleWeightChange = (event, newWeight) => {
+    //     if (newWeight !== null) {
+    //         setSelectedWeight(newWeight);
+    //     }
+    // };
 
     const incrementQuantity = () => setQuantity(prev => prev + 1);
     const decrementQuantity = () => setQuantity(prev => Math.max(1, prev - 1));
@@ -50,16 +50,16 @@ const CartItem = ({item}) => {
                     marginLeft:"8px"
                 }}
             >
-                <Button size="small" onClick={decrementQuantity}>-</Button>
+                <Button size="small" onClick={(e)=>handleQuantityOrWeight(e, item,"decrement")}>-</Button>
                 <Typography sx={{ fontWeight: 500 }}>{item.quantity}</Typography>
-                <Button size="small" onClick={incrementQuantity}>+</Button>
+                <Button size="small" onClick={(e,newWeight)=>handleQuantityOrWeight(e, item,"increment",newWeight)}>+</Button>
             </Typography>
             <CardActions>
                 {/* Weight Options */}
                     <ToggleButtonGroup
                         value={item.weight}
                         exclusive
-                        onChange={handleWeightChange}
+                        onChange={(e)=>handleQuantityOrWeight(e, item,"weight")}
                         aria-label="weight selection"
                         size="small"
                         sx={{ fontFamily: 'Poppins, sans-serif',paddingLeft:"0px" }}
@@ -71,7 +71,7 @@ const CartItem = ({item}) => {
                     </ToggleButtonGroup>
 
                 {/* Delete Button */}
-                <div>
+                <div onClick={()=>handleDeleteCartItem(item._id)}>
                     <IconButton size="small" color="error">
                         <DeleteIcon />
                     </IconButton>
@@ -82,7 +82,7 @@ const CartItem = ({item}) => {
 </>
 
 }
-const CartList = ({cartItems}) => {
+const CartList = ({cartItems,handleQuantityOrWeight,handleDeleteCartItem}) => {
      // Function to handle order placement
      const [orderPlaced, setOrderPlaced] = useState(false);
      const placeOrder = () => {
@@ -100,7 +100,7 @@ const CartList = ({cartItems}) => {
         <div style={{ maxHeight: "70vh",paddingBottom:"20px" }} className="cartList-container invisibleScroller">
             
             {
-                cartItems.map((item)=> <CartItem item={item}/>)
+                cartItems.map((item)=> <CartItem item={item} handleQuantityOrWeight={handleQuantityOrWeight} handleDeleteCartItem={handleDeleteCartItem}/>)
             }
            
 
