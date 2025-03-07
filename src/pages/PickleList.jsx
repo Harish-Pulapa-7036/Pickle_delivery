@@ -11,13 +11,11 @@ const PickleCard = ({ image, name, price, onAddToCart }) => (
         <h3 className="pickle-name">{name}</h3>
         <p className="pickle-price">₹{price}</p>
         <button className="add-to-cart-btn" onClick={onAddToCart}>
-        <div style={{ width: '12px', height: '12px' }}>
-    <ShoppingCartIcon style={{ width: '100%', height: '100%' }} />
-</div>
-
+            <div style={{ width: '12px', height: '12px' }}>
+                <ShoppingCartIcon style={{ width: '100%', height: '100%' }} />
+            </div>
             Add to Cart
-            
-            </button>
+        </button>
     </div>
 );
 // const pickles = [
@@ -39,29 +37,32 @@ const PickleCard = ({ image, name, price, onAddToCart }) => (
 //     { image: '/images/mango-pickle.jpg', name: 'Mixed Pickle', price: 200 },
 // ];
 const vegPickles = [
-    { image: '/images/mango-pickle.jpg', name: 'Mango Pickle', price: 150 },
-    { image: '/images/mango-pickle.jpg', name: 'Lemon Pickle', price: 120 },
-    { image: '/images/mango-pickle.jpg', name: 'Garlic Pickle', price: 180 },
-    { image: '/images/mango-pickle.jpg', name: 'Mango Pickle', price: 150 },
-    { image: '/images/mango-pickle.jpg', name: 'Lemon Pickle', price: 120 },
-    { image: '/images/mango-pickle.jpg', name: 'Garlic Pickle', price: 180 }, { image: '/images/mango-pickle.jpg', name: 'Mango Pickle', price: 150 },
-    { image: '/images/mango-pickle.jpg', name: 'Lemon Pickle', price: 120 },
-    { image: '/images/mango-pickle.jpg', name: 'Garlic Pickle', price: 180 },
+    { image: '/images/mango-pickle.jpg', name: 'Gongura Pickle', price: 700 },
+    { image: '/images/mango-pickle.jpg', name: 'Ginger(Allam) Pickle', price: 750 },
+    { image: '/images/mango-pickle.jpg', name: 'Kothimeera Pickle', price: 700 },
+    { image: '/images/mango-pickle.jpg', name: 'Mango Pickle', price: 750 },
+    { image: '/images/mango-pickle.jpg', name: 'Lemon Pickle', price: 700 },
+    { image: '/images/mango-pickle.jpg', name: 'PanduMirchi Pickle', price: 700 },
+     { image: '/images/mango-pickle.jpg', name: 'Pudhina Pickle', price: 750 },
+    { image: '/images/mango-pickle.jpg', name: 'Tomato Pickle', price: 700 },
+    { image: '/images/mango-pickle.jpg', name: 'UsiriKaya(Amla) Pickle', price: 800 },
 ];
 
 const nonVegPickles = [
-    { image: '/images/chicken-pickle.jpg', name: 'Chicken Pickle', price: 250 },
-    { image: '/images/prawn-pickle.jpg', name: 'Prawn Pickle', price: 300 },
-    { image: '/images/fish-pickle.jpg', name: 'Fish Pickle', price: 280 },
-    { image: '/images/mango-pickle.jpg', name: 'Mango Pickle', price: 150 },
-    { image: '/images/mango-pickle.jpg', name: 'Lemon Pickle', price: 120 },
-    { image: '/images/mango-pickle.jpg', name: 'Garlic Pickle', price: 180 }, { image: '/images/mango-pickle.jpg', name: 'Mango Pickle', price: 150 },
-    { image: '/images/mango-pickle.jpg', name: 'Lemon Pickle', price: 120 },
-    { image: '/images/mango-pickle.jpg', name: 'Garlic Pickle', price: 180 },
+    { image: '/images/mango-pickle.jpg', name: 'Chicken Pickle(Bone)', price: 1150 },
+    { image: '/images/mango-pickle.jpg', name: 'Chicken Pickle(BoneLess)', price: 1450 },
+    { image: '/images/mango-pickle.jpg', name: 'Chicken Gongura Pickle', price: 1350 },
+    { image: '/images/mango-pickle.jpg', name: 'Mutton Pickle(Bone)', price: 1850 },
+    { image: '/images/mango-pickle.jpg', name: 'Mutton Pickle(BoneLess)', price: 2200 },
+    { image: '/images/mango-pickle.jpg', name: 'Mutton Gongura Pickle(BoneLess)', price: 2100 },
+    { image: '/images/mango-pickle.jpg', name: 'Prawns Pickle', price: 2000 },
+     { image: '/images/mango-pickle.jpg', name: 'Prawns Gongura Pickle', price: 2050 },
+    { image: '/images/mango-pickle.jpg', name: 'Fish Pickle', price: 1300 },
+    { image: '/images/mango-pickle.jpg', name: 'Koramenu Fish Pickle', price: 1500 },
 ];
 
 
-const PickleList = () => {
+const PickleList = ({onAddToCart}) => {
     const [tabIndex, setTabIndex] = useState(0);
     const navigate = useNavigate()
     const handleTabChange = (event, newIndex) => {
@@ -72,7 +73,6 @@ const PickleList = () => {
     }
 
     const pickles = tabIndex === 0 ? vegPickles : nonVegPickles;
-
     return (
         <Box className="pickle-tabs-container " sx={{ width: "100%", position: "relative" }} >
             <Tabs value={tabIndex} onChange={handleTabChange} centered
@@ -125,7 +125,7 @@ const PickleList = () => {
                         image={pickle.image}
                         name={pickle.name}
                         price={pickle.price}
-                        onAddToCart={() => console.log(`${pickle.name} added to cart`)}
+                        onAddToCart={()=>{onAddToCart(pickle.name,pickle.price)}}
                     />
                 ))}
 

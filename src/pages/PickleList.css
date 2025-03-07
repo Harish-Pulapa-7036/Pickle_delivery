@@ -24,16 +24,18 @@
 }
 
 .pickle-name {
-    margin: 10px 0 5px;
+    margin: 10px  5px;
     font-size: 14px;
     font-weight: bold;
     color: black;
+    height: 20px;
 }
 
 .pickle-price {
     margin: 0 0 10px;
     color: #555;
     font-size: 14px;
+    margin-top: 5px;
 }
 
 .add-to-cart-btn {

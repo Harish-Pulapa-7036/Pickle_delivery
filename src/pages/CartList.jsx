@@ -3,7 +3,7 @@ import "./CartList.css"
 import { useState } from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
 import OrderPopup from "../components/OrderPopup";
-const CartItem = () => {
+const CartItem = ({item}) => {
     const [selectedWeight, setSelectedWeight] = useState('250gms');
     const [quantity, setQuantity] = useState(1);
 
@@ -15,6 +15,10 @@ const CartItem = () => {
 
     const incrementQuantity = () => setQuantity(prev => prev + 1);
     const decrementQuantity = () => setQuantity(prev => Math.max(1, prev - 1));
+    // productName:productName,
+    // pricePerKg:pricePerKg,
+    // weight:"1000g",
+    // quantity:1
     return <>
     <Card sx={{ border: "3px solid white", fontFamily: 'Poppins, sans-serif',borderRadius:"20px" }}>
         <CardContent style={{ display: "flex",
@@ -28,10 +32,10 @@ const CartItem = () => {
             />
             <CardContent sx={{ fontFamily: 'Poppins, sans-serif' }}>
                 <Typography gutterBottom variant="h7" component="div" sx={{ fontWeight: 600, fontSize: '1rem' }}>
-                    Mango Pickle
+                    {item.productName}
                 </Typography>
                 <Typography variant="body2" sx={{ color: 'text.secondary', fontSize: '0.875rem' }}>
-                    120 Rs/kg
+                {item.pricePerKg}
                 </Typography>
             </CardContent>
         </CardContent>
@@ -47,13 +51,13 @@ const CartItem = () => {
                 }}
             >
                 <Button size="small" onClick={decrementQuantity}>-</Button>
-                <Typography sx={{ fontWeight: 500 }}>{quantity}</Typography>
+                <Typography sx={{ fontWeight: 500 }}>{item.quantity}</Typography>
                 <Button size="small" onClick={incrementQuantity}>+</Button>
             </Typography>
             <CardActions>
                 {/* Weight Options */}
                     <ToggleButtonGroup
-                        value={selectedWeight}
+                        value={item.quantity}
                         exclusive
                         onChange={handleWeightChange}
                         aria-label="weight selection"
@@ -78,7 +82,7 @@ const CartItem = () => {
 </>
 
 }
-const CartList = () => {
+const CartList = ({cartItems}) => {
      // Function to handle order placement
      const [orderPlaced, setOrderPlaced] = useState(false);
      const placeOrder = () => {
@@ -94,9 +98,11 @@ const CartList = () => {
     return (
         <>
         <div style={{ maxHeight: "70vh",paddingBottom:"20px" }} className="cartList-container invisibleScroller">
-            <CartItem />
-            <CartItem />
-            <CartItem />
+            
+            {
+                cartItems.map((item)=> <CartItem item={item}/>)
+            }
+           
 
         </div>
           {/* Sticky Total Bar */}
