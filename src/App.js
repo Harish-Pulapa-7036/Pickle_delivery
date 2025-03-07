@@ -142,7 +142,7 @@ function App() {
         <div className="app-container" style={{
             // backgroundImage: "url('/images/background_pickle.jpg')"
         }}>
-            <Header  cartCount={cartItems.length}/>
+            <Header  cartCount={cartItems?.length}/>
             <main className="main-content">
                 <Routes>
                     <Route path="/" element={<PrivateRoute><PickleList onAddToCart={onAddToCart} /></PrivateRoute>} />

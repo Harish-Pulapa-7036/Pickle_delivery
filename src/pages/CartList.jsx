@@ -3,7 +3,7 @@ import "./CartList.css"
 import { useState } from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
 import OrderPopup from "../components/OrderPopup";
-const CartItem = ({item,handleQuantityOrWeight,handleDeleteCartItem}) => {
+const CartItem = ({ item, handleQuantityOrWeight, handleDeleteCartItem }) => {
     const [selectedWeight, setSelectedWeight] = useState('250gms');
     const [quantity, setQuantity] = useState(1);
 
@@ -20,49 +20,50 @@ const CartItem = ({item,handleQuantityOrWeight,handleDeleteCartItem}) => {
     // weight:"1000g",
     // quantity:1
     return <>
-    <Card sx={{ border: "3px solid white", fontFamily: 'Poppins, sans-serif',borderRadius:"20px" }}>
-        <CardContent style={{ display: "flex",
-                    marginLeft:"8px"
+        <Card sx={{ border: "3px solid white", fontFamily: 'Poppins, sans-serif', borderRadius: "20px" }}>
+            <CardContent style={{
+                display: "flex",
+                marginLeft: "8px"
 
-         }}>
-            <CardMedia
-                sx={{ width: "100px", height: "80px" }}
-                image="/images/mango-pickle.jpg"
-                title="Mango Pickle"
-            />
-            <CardContent sx={{ fontFamily: 'Poppins, sans-serif' }}>
-                <Typography gutterBottom variant="h7" component="div" sx={{ fontWeight: 600, fontSize: '1rem' }}>
-                    {item.productName}
-                </Typography>
-                <Typography variant="body2" sx={{ color: 'text.secondary', fontSize: '0.875rem' }}>
-                {item.pricePerKg}
-                </Typography>
+            }}>
+                <CardMedia
+                    sx={{ width: "100px", height: "80px" }}
+                    image="/images/mango-pickle.jpg"
+                    title="Mango Pickle"
+                />
+                <CardContent sx={{ fontFamily: 'Poppins, sans-serif' }}>
+                    <Typography gutterBottom variant="h7" component="div" sx={{ fontWeight: 600, fontSize: '1rem' }}>
+                        {item.productName}
+                    </Typography>
+                    <Typography variant="body2" sx={{ color: 'text.secondary', fontSize: '0.875rem' }}>
+                        {item.pricePerKg}
+                    </Typography>
+                </CardContent>
             </CardContent>
-        </CardContent>
-        <CardContent>
-            <Typography
-                style={{
-                    display: "inline-flex",
-                    alignItems: 'center',
-                    backgroundColor: "#e9e3e3",
-                    alignSelf: "flex-start",
-                    fontFamily: 'Poppins, sans-serif',
-                    marginLeft:"8px"
-                }}
-            >
-                <Button size="small" onClick={(e)=>handleQuantityOrWeight(e, item,"decrement")}>-</Button>
-                <Typography sx={{ fontWeight: 500 }}>{item.quantity}</Typography>
-                <Button size="small" onClick={(e,newWeight)=>handleQuantityOrWeight(e, item,"increment",newWeight)}>+</Button>
-            </Typography>
-            <CardActions>
-                {/* Weight Options */}
+            <CardContent>
+                <Typography
+                    style={{
+                        display: "inline-flex",
+                        alignItems: 'center',
+                        backgroundColor: "#e9e3e3",
+                        alignSelf: "flex-start",
+                        fontFamily: 'Poppins, sans-serif',
+                        marginLeft: "8px"
+                    }}
+                >
+                    <Button size="small" onClick={(e) => handleQuantityOrWeight(e, item, "decrement")}>-</Button>
+                    <Typography sx={{ fontWeight: 500 }}>{item.quantity}</Typography>
+                    <Button size="small" onClick={(e, newWeight) => handleQuantityOrWeight(e, item, "increment", newWeight)}>+</Button>
+                </Typography>
+                <CardActions>
+                    {/* Weight Options */}
                     <ToggleButtonGroup
                         value={item.weight}
                         exclusive
-                        onChange={(e)=>handleQuantityOrWeight(e, item,"weight")}
+                        onChange={(e) => handleQuantityOrWeight(e, item, "weight")}
                         aria-label="weight selection"
                         size="small"
-                        sx={{ fontFamily: 'Poppins, sans-serif',paddingLeft:"0px" }}
+                        sx={{ fontFamily: 'Poppins, sans-serif', paddingLeft: "0px" }}
                     >
                         <ToggleButton value="250gms">250gms</ToggleButton>
                         <ToggleButton value="500gms">500gms</ToggleButton>
@@ -70,22 +71,22 @@ const CartItem = ({item,handleQuantityOrWeight,handleDeleteCartItem}) => {
                         <ToggleButton value="1kg">1kg</ToggleButton>
                     </ToggleButtonGroup>
 
-                {/* Delete Button */}
-                <div onClick={()=>handleDeleteCartItem(item._id)}>
-                    <IconButton size="small" color="error">
-                        <DeleteIcon />
-                    </IconButton>
-                </div>
-            </CardActions>
-        </CardContent>
-    </Card>
-</>
+                    {/* Delete Button */}
+                    <div onClick={() => handleDeleteCartItem(item._id)}>
+                        <IconButton size="small" color="error">
+                            <DeleteIcon />
+                        </IconButton>
+                    </div>
+                </CardActions>
+            </CardContent>
+        </Card>
+    </>
 
 }
-const CartList = ({cartItems,handleQuantityOrWeight,handleDeleteCartItem}) => {
-     // Function to handle order placement
-     const [orderPlaced, setOrderPlaced] = useState(false);
-     const placeOrder = () => {
+const CartList = ({ cartItems, handleQuantityOrWeight, handleDeleteCartItem }) => {
+    // Function to handle order placement
+    const [orderPlaced, setOrderPlaced] = useState(false);
+    const placeOrder = () => {
         setOrderPlaced(true);
 
         // // Play order placed sound
@@ -97,38 +98,47 @@ const CartList = ({cartItems,handleQuantityOrWeight,handleDeleteCartItem}) => {
     };
     return (
         <>
-        <div style={{ maxHeight: "70vh",paddingBottom:"20px" }} className="cartList-container invisibleScroller">
-            
-            {
-                cartItems.map((item)=> <CartItem item={item} handleQuantityOrWeight={handleQuantityOrWeight} handleDeleteCartItem={handleDeleteCartItem}/>)
-            }
-           
+            <div style={{ maxHeight: "70vh", paddingBottom: "20px" }} className="cartList-container invisibleScroller">
 
-        </div>
-          {/* Sticky Total Bar */}
-          <div className="cartTotalBar">
-            <div style={{display:"flex",justifyContent :"space-around",gap:"15px"}}>
+                {
+                    cartItems && cartItems?.length ?
+                        cartItems.map((item) =>
+                            <CartItem
+                                item={item}
+                                handleQuantityOrWeight={handleQuantityOrWeight}
+                                handleDeleteCartItem={handleDeleteCartItem}
+                            />
+                        ) : <div>No cart items</div>
+                }
 
-                <Typography variant="h7" sx={{ color: 'white' }}>
-                    Total
-                </Typography>
-                <Typography variant="h7" sx={{ color: 'white' }}>
-                    Rs 100.00
-                </Typography>
+
             </div>
+            {/* Sticky Total Bar */}
+            <div className="cartTotalBar">
+                <div style={{ display: "flex", justifyContent: "space-around", gap: "15px" }}>
 
-            <Button size="large" 
-             sx={{background:'green',color:"white", '&:hover': {
-                        backgroundColor: "#0056b3",  // Keep white on hover
-                        color: "white"             // Optional - keep text color
-                    }}}
+                    <Typography variant="h7" sx={{ color: 'white' }}>
+                        Total
+                    </Typography>
+                    <Typography variant="h7" sx={{ color: 'white' }}>
+                        Rs 100.00
+                    </Typography>
+                </div>
+
+                <Button size="large"
+                    sx={{
+                        background: 'green', color: "white", '&:hover': {
+                            backgroundColor: "#0056b3",  // Keep white on hover
+                            color: "white"             // Optional - keep text color
+                        }
+                    }}
                     onClick={placeOrder}
-                    >
-                        place order
-                        </Button>
+                >
+                    place order
+                </Button>
 
             </div>
-            <OrderPopup setOrderPlaced={setOrderPlaced} orderPlaced={orderPlaced}/>
+            <OrderPopup setOrderPlaced={setOrderPlaced} orderPlaced={orderPlaced} />
         </>
     )
 }
