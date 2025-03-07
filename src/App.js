@@ -104,7 +104,7 @@ function App() {
             };
         }else return
      
-        let url = 'http://localhost:8000/api/v1/pickle/update-product'
+        let url = 'https://pickle-backend-2xil.onrender.com/api/v1/pickle/update-product'
         try {
             let response = await axios.put(url, body, {
                 headers: {
@@ -122,7 +122,7 @@ function App() {
     }
     const handleDeleteCartItem=async(productId)=>{
         
-       let url = `http://localhost:8000/api/v1/pickle/deleteCart-product?productId=${productId}`
+       let url = `https://pickle-backend-2xil.onrender.com/api/v1/pickle/deleteCart-product?productId=${productId}`
         try {
             let response = await axios.delete(url, {
                 headers: {
