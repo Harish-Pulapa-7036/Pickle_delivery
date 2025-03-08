@@ -14,6 +14,7 @@ import PrivateRoute from "./PrivateRoute";
 import OrdersList from "./pages/OrderList";
 import axios from "axios";
 import Loader from "./components/Loader";
+import NotFound from "./pages/NotFound";
 
 function App() {
     const navigate = useNavigate();
@@ -24,7 +25,8 @@ function App() {
         if (sessionStorage.getItem("token")) {
             // navigate('/')
             getCartItems();
-        } else navigate('/login')
+        } 
+        // else navigate('/login')
     }, [navigate])
  
     const getCartItems = async () => {
@@ -153,7 +155,7 @@ function App() {
                     {/* <Route path="/picklelist" element={<PrivateRoute><PickleList onAddToCart={onAddToCart} /></PrivateRoute>} /> */}
                     <Route path="/cart" element={<PrivateRoute><CartList handleQuantityOrWeight={handleQuantityOrWeight} handleDeleteCartItem={handleDeleteCartItem} cartItems={cartItems} /></PrivateRoute>} />
                     <Route path="/orders" element={<PrivateRoute><OrdersList /></PrivateRoute>} />
-
+                    <Route path="*" element={<NotFound />} />
                 </Routes>
             </main>
             <Footer />

@@ -1,8 +1,10 @@
-import { Button, Card, CardActions, CardContent, CardMedia, IconButton, ToggleButton, Typography, ToggleButtonGroup } from "@mui/material";
+import { Button, Card, Box, CardActions, CardContent, CardMedia, IconButton, ToggleButton, Typography, ToggleButtonGroup } from "@mui/material";
 import "./CartList.css"
 import { useState } from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import OrderPopup from "../components/OrderPopup";
+import { useNavigate } from "react-router-dom";
 const CartItem = ({ item, handleQuantityOrWeight, handleDeleteCartItem }) => {
     const [selectedWeight, setSelectedWeight] = useState('250gms');
     const [quantity, setQuantity] = useState(1);
@@ -86,6 +88,8 @@ const CartItem = ({ item, handleQuantityOrWeight, handleDeleteCartItem }) => {
 const CartList = ({ cartItems, handleQuantityOrWeight, handleDeleteCartItem }) => {
     // Function to handle order placement
     const [orderPlaced, setOrderPlaced] = useState(false);
+        const navigate = useNavigate();
+    
     const placeOrder = () => {
         setOrderPlaced(true);
 
@@ -108,13 +112,33 @@ const CartList = ({ cartItems, handleQuantityOrWeight, handleDeleteCartItem }) =
                                 handleQuantityOrWeight={handleQuantityOrWeight}
                                 handleDeleteCartItem={handleDeleteCartItem}
                             />
-                        ) : <div>No cart items</div>
+                        ) :   <Box
+                        display="flex"
+                        flexDirection="column"
+                        alignItems="center"
+                        justifyContent="center"
+                        p={4}
+                      >
+                        <Typography variant="h3" p={4} className="cart-text">
+                          Cart items are empty
+                        </Typography>
+                        <Button
+                          variant="contained"
+                          color="primary"
+                          startIcon={<ShoppingCartIcon />}
+                          onClick={() => navigate('/')}
+                        >
+                          Continue Shopping
+                        </Button>
+                      </Box>
                 }
 
 
             </div>
             {/* Sticky Total Bar */}
-            <div className="cartTotalBar">
+            {
+                cartItems && cartItems?.length ? 
+                <div className="cartTotalBar">
                 <div style={{ display: "flex", justifyContent: "space-around", gap: "15px" }}>
 
                     <Typography variant="h7" sx={{ color: 'white' }}>
@@ -138,6 +162,9 @@ const CartList = ({ cartItems, handleQuantityOrWeight, handleDeleteCartItem }) =
                 </Button>
 
             </div>
+                : null
+            }
+            
             <OrderPopup setOrderPlaced={setOrderPlaced} orderPlaced={orderPlaced} />
         </>
     )
