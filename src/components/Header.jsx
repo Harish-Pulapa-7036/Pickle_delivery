@@ -3,6 +3,21 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Header.css';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 
+const HeaderText = () => {
+  const navigate = useNavigate();
+
+  return (
+    <h1
+      onClick={() => navigate("/")}
+      className="logo-heading"
+    >
+      <img src={'/images/mango-pickle.jpg'} alt="PP Logo" className="logo" />
+      Padmaja Pickles
+    </h1>
+  );
+};
+
+
 const Header = ({cartCount}) => {
     const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef();
@@ -26,7 +41,7 @@ const Header = ({cartCount}) => {
     const navigate=useNavigate()
     return (
         <header className="header">
-            <h1 onClick={()=>navigate('/')}>Padmaja Pickles</h1>
+            <HeaderText />
             <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
             {menuOpen ? '✖' : '☰'}
             </button>
