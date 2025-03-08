@@ -85,7 +85,7 @@ const CartItem = ({ item, handleQuantityOrWeight, handleDeleteCartItem }) => {
     </>
 
 }
-const CartList = ({ cartItems, handleQuantityOrWeight, handleDeleteCartItem }) => {
+const CartList = ({ cartItems, handleQuantityOrWeight, handleDeleteCartItem, totalPrice }) => {
     // Function to handle order placement
     const [orderPlaced, setOrderPlaced] = useState(false);
         const navigate = useNavigate();
@@ -120,7 +120,7 @@ const CartList = ({ cartItems, handleQuantityOrWeight, handleDeleteCartItem }) =
                         p={4}
                       >
                         <Typography variant="h3" p={4} className="cart-text">
-                          Cart items are empty
+                          Cart items are empty 😔 
                         </Typography>
                         <Button
                           variant="contained"
@@ -145,7 +145,7 @@ const CartList = ({ cartItems, handleQuantityOrWeight, handleDeleteCartItem }) =
                         Total
                     </Typography>
                     <Typography variant="h7" sx={{ color: 'white' }}>
-                        Rs 100.00
+                        {`Rs ${totalPrice}`}
                     </Typography>
                 </div>
 

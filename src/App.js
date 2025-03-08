@@ -39,7 +39,7 @@ function App() {
                     token: sessionStorage.getItem('token')   // <- Add the token in headers
                 }
             })
-            setCartItems(response.data.cart.products)
+            setCartItems(response.data.cart)
             setShowLoader(false)
 
         } catch (error) {
@@ -64,7 +64,7 @@ function App() {
                 }
             })
             console.log(response);
-            setCartItems(response.data.cart.products)
+            setCartItems(response.data.cart)
             setShowLoader(false)
         } catch (error) {
             setShowLoader(false)
@@ -114,7 +114,7 @@ function App() {
                 }
             })
             console.log(response);
-            setCartItems(response.data.cart.products)
+            setCartItems(response.data.cart)
             setShowLoader(false)
         } catch (error) {
             setShowLoader(false)
@@ -132,7 +132,7 @@ function App() {
                 }
             })
             console.log(response);
-            setCartItems(response.data.cart.products)
+            setCartItems(response.data.cart)
             setShowLoader(false)
         } catch (error) {
             setShowLoader(false)
@@ -144,7 +144,7 @@ function App() {
         <div className="app-container" style={{
             // backgroundImage: "url('/images/background_pickle.jpg')"
         }}>
-            <Header  cartCount={cartItems?.length}/>
+            <Header  cartCount={cartItems?.products?.length}/>
             <main className="main-content">
                 <Routes>
                     <Route path="/" element={<PrivateRoute><PickleList onAddToCart={onAddToCart} /></PrivateRoute>} />
@@ -153,7 +153,7 @@ function App() {
                     <Route path="/signup" element={<Signup />} />
                     <Route path="/login" element={<Login />} />
                     {/* <Route path="/picklelist" element={<PrivateRoute><PickleList onAddToCart={onAddToCart} /></PrivateRoute>} /> */}
-                    <Route path="/cart" element={<PrivateRoute><CartList handleQuantityOrWeight={handleQuantityOrWeight} handleDeleteCartItem={handleDeleteCartItem} cartItems={cartItems} /></PrivateRoute>} />
+                    <Route path="/cart" element={<PrivateRoute><CartList handleQuantityOrWeight={handleQuantityOrWeight} handleDeleteCartItem={handleDeleteCartItem} cartItems={cartItems?.products} totalPrice={cartItems.totalPrice}/></PrivateRoute>} />
                     <Route path="/orders" element={<PrivateRoute><OrdersList /></PrivateRoute>} />
                     <Route path="*" element={<NotFound />} />
                 </Routes>
