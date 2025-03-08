@@ -1,7 +1,7 @@
 .header {
     position: relative;
     z-index: 1000;
-    background-color: #007bff;
+    background-color: #162535;
     color: white;
     padding: 10px 20px;
     display: flex;
@@ -48,6 +48,21 @@
     color: white;
     cursor: pointer;
 }
+.cart-count {
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    border-radius: 50%;
+    width: 17px;
+    height: 17px;
+    display: flex
+;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -5px;
+    right: -10px;
+}
 
 /* Mobile Styles */
 @media (max-width: 600px) {
@@ -58,11 +73,13 @@
     .nav {
         display: none;
         width: 100%;
-        background-color: #007bff;
+        background-color: #162535;
         position: absolute;
         top: 100%;
         left: 0;
         padding: 10px 0;
+        height: 90vh;
+        font-size: 25px;
     }
 
     .nav.open {

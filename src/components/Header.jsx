@@ -8,27 +8,27 @@ const Header = ({cartCount}) => {
     const menuRef = useRef();
     const token =sessionStorage.getItem("token")
     // Close menu if user clicks outside of the menu
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (menuRef.current && !menuRef.current.contains(event.target)) {
-                setMenuOpen(false);
-            }
-        };
+    // useEffect(() => {
+    //     const handleClickOutside = (event) => {
+    //         if (menuRef.current && !menuRef.current.contains(event.target)) {
+    //             setMenuOpen(false);
+    //         }
+    //     };
 
-        if (menuOpen) {
-            document.addEventListener('mousedown', handleClickOutside);
-        } else {
-            document.removeEventListener('mousedown', handleClickOutside);
-        }
+    //     if (menuOpen) {
+    //         document.addEventListener('mousedown', handleClickOutside);
+    //     } else {
+    //         document.removeEventListener('mousedown', handleClickOutside);
+    //     }
 
-        return () => document.removeEventListener('mousedown', handleClickOutside);
-    }, [menuOpen]);
+    //     return () => document.removeEventListener('mousedown', handleClickOutside);
+    // }, [menuOpen]);
 
     return (
         <header className="header">
             <h1>Padmaja Pickles</h1>
             <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
-                ☰
+            {menuOpen ? '✖' : '☰'}
             </button>
             <nav ref={menuRef} className={`nav ${menuOpen ? 'open' : ''}`}>
                 <ul>
@@ -41,7 +41,7 @@ const Header = ({cartCount}) => {
                   <li><Link to="/signup" onClick={() => setMenuOpen(false)}>Signup</Link></li>}
                     <li><Link to="/orders" onClick={() => setMenuOpen(false)}>Your Orders</Link></li>
                 
-                    <li>  <Link to="/cart" className="cart-icon" onClick={() => {setMenuOpen(false)}}>
+                    <li>  <Link to="/cart" className="cart-icon" style={{position:"relative"}} onClick={() => {setMenuOpen(false)}}>
                     <ShoppingCartIcon />
                     {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
                 </Link></li>
