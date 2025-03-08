@@ -88,11 +88,12 @@
 
     .nav ul {
         flex-direction: column;
-        gap: 25px;
+        gap: 5px;
         padding-left: 0;
     }
 
     .nav li {
-        padding: 5px 20px;
+        padding: 15px 20px;
+        box-sizing: border-box;
     }
 }
