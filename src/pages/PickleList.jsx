@@ -118,7 +118,7 @@ const PickleList = ({onAddToCart}) => {
                 <Tab label="Veg Pickles" />
                 <Tab label="Non-Veg Pickles" />
             </Tabs>
-            <div className="pickle-list-container invisibleScroller" style={{ maxHeight: "70vh", marginBottom: "3rem" }}>
+            <div className="pickle-list-container invisibleScroller" style={{ maxHeight: "70vh", }}>
                 {pickles.map((pickle, index) => (
                     <PickleCard
                         key={index}
