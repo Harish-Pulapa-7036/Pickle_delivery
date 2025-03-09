@@ -102,7 +102,7 @@ const CartList = ({ cartItems, handleQuantityOrWeight, handleDeleteCartItem, tot
     };
     return (
         <>
-            <div style={{ maxHeight: "70vh", paddingBottom: "20px" }} className="cartList-container invisibleScroller">
+            <div style={{ maxHeight: "70vh", marginBottom:"4rem",boxSizing:"border-box" }} className="cartList-container invisibleScroller">
 
                 {
                     cartItems && cartItems?.length ?
